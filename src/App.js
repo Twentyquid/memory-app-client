@@ -7,6 +7,7 @@ import Home from "./components/Home";
 import Navbar from "./components/Navbar";
 import TitleBar from "./components/TitleBar";
 import { Routes, Route } from "react-router-dom";
+import AddPost from "./components/AddPost";
 
 function App() {
   const dispatch = useDispatch();
@@ -19,6 +20,7 @@ function App() {
       <TitleBar></TitleBar>
       <Routes>
         <Route path="/" element={<Home />}></Route>
+        <Route path="/add" element={<AddPost />}></Route>
       </Routes>
       <Navbar></Navbar>
     </>

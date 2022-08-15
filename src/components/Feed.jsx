@@ -4,7 +4,7 @@ import { MdDeleteOutline, MdFavoriteBorder } from "react-icons/md";
 
 function Feed(props) {
   return (
-    <article className="border-2 border-slate-600 rounded-xl flex flex-col justify-between p-8 mb-8 bg-white">
+    <article className="border-2 border-slate-600 rounded-3xl flex flex-col justify-between p-8 mb-8 bg-white overflow-hidden">
       <h3 className="text-lg font-semibold">{props.title.toUpperCase()}</h3>
       <p className="mt-2 text-slate-500 text-xs">
         {props.tags.map((item, i) => {

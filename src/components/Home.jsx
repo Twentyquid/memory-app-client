@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 function Home() {
   const feed = useSelector((state) => state.posts);
   return (
-    <section className="h-screen bg-home overflow-y-scroll py-16  px-3">
+    <section className="container bg-home overflow-y-scroll">
       {feed.map((item) => {
         return <Feed key={item._id} {...item} />;
       })}
