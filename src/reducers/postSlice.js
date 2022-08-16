@@ -8,15 +8,28 @@ export const postSlice = createSlice({
     getPosts: (state, action) => {
       return action.payload;
     },
+    uploadPosts: (state, action) => {
+      return [...state, action.payload];
+    },
   },
 });
 
-export const { getPosts } = postSlice.actions;
+const { getPosts, uploadPosts } = postSlice.actions;
 
 export const getFeed = () => async (dispatch) => {
   try {
     const { data } = await api.getFeed();
     dispatch(getPosts(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const createFeed = (newpost) => async (dispatch) => {
+  try {
+    newpost.tags = newpost.tags.split(",");
+    let { data } = await api.createFeed(newpost);
+    dispatch(uploadPosts(data));
   } catch (error) {
     console.log(error);
   }

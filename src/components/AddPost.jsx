@@ -1,13 +1,18 @@
 import React from "react";
 import { useEffect, useState } from "react";
+import { createFeed } from "../reducers/postSlice";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import backicon from "../images/backicon.png";
 import { Link } from "react-router-dom";
 
 function AddPost() {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [newpost, setNewpost] = useState({
     title: "",
     tags: "",
-    fileSelected: "",
+    imageFile: "",
     description: "",
   });
   useEffect(() => {
@@ -26,6 +31,8 @@ function AddPost() {
   function handleSubmit(e) {
     e.preventDefault();
     console.log(newpost);
+    dispatch(createFeed(newpost));
+    navigate("/");
   }
 
   function handleChange(e) {
@@ -65,7 +72,7 @@ function AddPost() {
 
       <form
         onSubmit={handleSubmit}
-        className="px-5 py-3 flex flex-col bg-white rounded-3xl border-2 border-slate-500 h-full mt-20"
+        className="px-5 py-3 flex flex-col justify-between bg-white rounded-3xl border-2 border-slate-500 h-full pb-20 mt-8"
       >
         <input
           onChange={handleChange}
@@ -73,6 +80,7 @@ function AddPost() {
           placeholder="Title"
           type="text"
           name="title"
+          required
         />
         <input
           onChange={handleChange}
@@ -80,6 +88,7 @@ function AddPost() {
           placeholder="Tags"
           type="text"
           name="tags"
+          required
         />
         <div className="mt-2 rounded-lg w-full flex">
           <label
@@ -100,7 +109,7 @@ function AddPost() {
             let reader = new FileReader();
             reader.onload = function (event) {
               let result = event.target.result;
-              setNewpost({ ...newpost, fileSelected: result });
+              setNewpost({ ...newpost, imageFile: result });
             };
             reader.readAsDataURL(e.target.files[0]);
           }}
@@ -108,6 +117,7 @@ function AddPost() {
           type="file"
           id="actual-btn"
           hidden
+          required
         />
         <textarea
           onChange={handleChange}
@@ -116,6 +126,7 @@ function AddPost() {
           name="description"
           type="text"
           rows="3"
+          required
         />
         <button
           className="bg-orange-400  mr-auto px-2 py-1 rounded-lg mt-2"
