@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { createFeed } from "../reducers/postSlice";
+import compressImage from "../utils/imageCompression";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import backicon from "../images/backicon.png";
@@ -72,7 +73,7 @@ function AddPost() {
 
       <form
         onSubmit={handleSubmit}
-        className="px-5 py-3 flex flex-col justify-between bg-white rounded-3xl border-2 border-slate-500 h-full pb-20 mt-8"
+        className="px-5 py-3 flex flex-col bg-white rounded-3xl border-2 border-slate-500 h-full pb-20 mt-8"
       >
         <input
           onChange={handleChange}
@@ -111,7 +112,13 @@ function AddPost() {
               let result = event.target.result;
               setNewpost({ ...newpost, imageFile: result });
             };
-            reader.readAsDataURL(e.target.files[0]);
+            compressImage(e.target.files[0])
+              .then((result) => {
+                reader.readAsDataURL(result);
+              })
+              .catch((error) => {
+                console.log(error);
+              });
           }}
           name="fileSelected"
           type="file"
