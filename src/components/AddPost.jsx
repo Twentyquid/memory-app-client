@@ -1,6 +1,7 @@
 import React from "react";
 import { useEffect, useState } from "react";
 import { createFeed } from "../reducers/postSlice";
+import { Circles } from "react-loader-spinner";
 import compressImage from "../utils/imageCompression";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
@@ -8,6 +9,7 @@ import backicon from "../images/backicon.png";
 import { Link } from "react-router-dom";
 
 function AddPost() {
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [newpost, setNewpost] = useState({
@@ -112,9 +114,11 @@ function AddPost() {
               let result = event.target.result;
               setNewpost({ ...newpost, imageFile: result });
             };
+            setLoading(true);
             compressImage(e.target.files[0])
               .then((result) => {
                 reader.readAsDataURL(result);
+                setLoading(false);
               })
               .catch((error) => {
                 console.log(error);
@@ -142,6 +146,13 @@ function AddPost() {
           SUBMIT
         </button>
       </form>
+      {loading ? (
+        <div className="absolute bg-white h-full w-full top-0 left-0 flex justify-center items-center">
+          <Circles width={80} height={80} color="#00BFFF" />
+        </div>
+      ) : (
+        <div></div>
+      )}
     </section>
   );
 }
