@@ -11,10 +11,15 @@ export const postSlice = createSlice({
     uploadPosts: (state, action) => {
       return [...state, action.payload];
     },
+    changePost: (state, action) => {
+      return state.map((item) =>
+        item._id === action.payload._id ? action.payload : item
+      );
+    },
   },
 });
 
-const { getPosts, uploadPosts } = postSlice.actions;
+const { getPosts, uploadPosts, changePost } = postSlice.actions;
 
 export const getFeed = () => async (dispatch) => {
   try {
@@ -30,6 +35,16 @@ export const createFeed = (newpost) => async (dispatch) => {
     newpost.tags = newpost.tags.split(",");
     let { data } = await api.createFeed(newpost);
     dispatch(uploadPosts(data));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const updateFeed = (modifiedPost) => async (dispatch) => {
+  try {
+    dispatch(changePost(modifiedPost));
+    // eslint-disable-next-line
+    let { data } = await api.updateFeed(modifiedPost, modifiedPost._id);
   } catch (error) {
     console.log(error);
   }

@@ -75,11 +75,11 @@ function AddPost() {
 
       <form
         onSubmit={handleSubmit}
-        className="px-5 py-3 flex flex-col bg-white rounded-3xl border-2 border-slate-500 h-full pb-20 mt-8"
+        className="px-5 py-3 flex flex-col bg-white rounded-3xl border-2 border-slate-500 h-full pb-20 pt-8 mt-8"
       >
         <input
           onChange={handleChange}
-          className="mt-2 px-2 py-1 rounded-lg bg-soapgreen"
+          className="mt-4 px-2 py-1 rounded-lg bg-soapgreen"
           placeholder="Title"
           type="text"
           name="title"
@@ -87,13 +87,13 @@ function AddPost() {
         />
         <input
           onChange={handleChange}
-          className="mt-2 px-2 py-1 rounded-lg bg-soapgreen"
+          className="mt-4 px-2 py-1 rounded-lg bg-soapgreen"
           placeholder="Tags"
           type="text"
           name="tags"
           required
         />
-        <div className="mt-2 rounded-lg w-full flex">
+        <div className="mt-4 rounded-lg w-full flex">
           <label
             className="px-2 py-1 rounded-lg bg-green-400"
             htmlFor="actual-btn"
@@ -130,17 +130,19 @@ function AddPost() {
           hidden
           required
         />
-        <textarea
-          onChange={handleChange}
-          placeholder="Description"
-          className="mt-2 px-2 py-1 rounded-lg bg-soapgreen"
-          name="description"
-          type="text"
-          rows="3"
-          required
-        />
+        <div className="w-full">
+          <textarea
+            onChange={handleChange}
+            placeholder="Description"
+            className="mt-4 px-2 py-1 rounded-lg bg-soapgreen w-full"
+            name="description"
+            type="text"
+            rows="3"
+            required
+          />
+        </div>
         <button
-          className="bg-orange-400  mr-auto px-2 py-1 rounded-lg mt-2"
+          className="bg-orange-400  mr-auto px-2 py-1 rounded-lg mt-4"
           type="submit"
         >
           SUBMIT

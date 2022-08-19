@@ -17,9 +17,11 @@ function Navbar() {
             <IoIosAddCircleOutline></IoIosAddCircleOutline>
           </div>
         </Link>
-        <div className="bg-yellow-300 p-1 flex justify-center items-center rounded-full">
-          <AiOutlineUser></AiOutlineUser>
-        </div>
+        <Link to="/dash">
+          <div className="bg-yellow-300 p-1 flex justify-center items-center rounded-full">
+            <AiOutlineUser></AiOutlineUser>
+          </div>
+        </Link>
       </div>
     </nav>
   );

@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import TitleBar from "./components/TitleBar";
 import { Routes, Route } from "react-router-dom";
 import AddPost from "./components/AddPost";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/add" element={<AddPost />}></Route>
+        <Route path="/dash" element={<Dashboard />}></Route>
       </Routes>
       <Navbar></Navbar>
     </>
