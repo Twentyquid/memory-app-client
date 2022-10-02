@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { createFeed } from "../reducers/postSlice";
+import { createFeed } from "../../reducers/postSlice";
 import { Circles } from "react-loader-spinner";
-import compressImage from "../utils/imageCompression";
+import compressImage from "../../utils/imageCompression";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import backicon from "../images/backicon.png";
+import backicon from "../../images/backicon.png";
 import { Link } from "react-router-dom";
 
 function AddPost() {
@@ -30,6 +30,15 @@ function AddPost() {
       });
     };
   }, []);
+
+  useEffect(() => {
+    let loggeduser = JSON.parse(localStorage.getItem("memories-app-user"));
+    if (loggeduser) {
+      navigate("/");
+    } else {
+      navigate("/getstarted");
+    }
+  }, [navigate]);
 
   function handleSubmit(e) {
     e.preventDefault();

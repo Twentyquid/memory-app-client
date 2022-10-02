@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 import postReducer from "./reducers/postSlice";
+import userReducer from "./reducers/userSlice";
 import "./index.css";
 import App from "./App";
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
@@ -12,6 +13,7 @@ import reportWebVitals from "./reportWebVitals";
 const store = configureStore({
   reducer: {
     posts: postReducer,
+    user: userReducer,
   },
 });
 

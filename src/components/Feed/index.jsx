@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { MdDeleteOutline, MdFavoriteBorder, MdFavorite } from "react-icons/md";
-import { updateFeed } from "../reducers/postSlice";
+import { updateFeed } from "../../reducers/postSlice";
 import { useState } from "react";
 // import defaultImage2 from "../images/default2.png";
 
