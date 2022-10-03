@@ -1,21 +1,29 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import {
   Box,
   TextField,
   Container,
   Button,
+  InputAdornment,
+  IconButton,
   FormControl,
   InputLabel,
   OutlinedInput,
-  InputAdornment,
-  IconButton,
 } from "@mui/material";
-
-import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Link } from "react-router-dom";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { createUser } from "../../reducers/userSlice";
 
-function Signup() {
+function Login() {
+  const dispatch = useDispatch();
+  const [values, setValues] = useState({
+    passwordVisible: false,
+    password: "",
+    name: "",
+    email: "",
+  });
   const theme = createTheme({
     palette: {
       accent: {
@@ -24,12 +32,6 @@ function Signup() {
     },
   });
 
-  const [values, setValues] = useState({
-    passwordVisible: false,
-    password: "",
-    name: "",
-    email: "",
-  });
   const handlePasswordVisibility = () => {
     setValues({ ...values, passwordVisible: !values.passwordVisible });
   };
@@ -37,10 +39,17 @@ function Signup() {
   const handleChange = (props) => (event) => {
     setValues({ ...values, [props]: event.target.value });
   };
+
+  const handleButton = () => {
+    let userdetails = values;
+    delete userdetails.passwordVisible;
+    dispatch(createUser(userdetails));
+    localStorage.setItem("redeem-user-data", userdetails);
+  };
   return (
     <div className="">
       <Container maxWidth="sm">
-        <h3 className="text-3xl mt-32">Get Started</h3>
+        <h3 className="text-3xl mt-32">Welcome Back</h3>
         <Box
           component="form"
           sx={{
@@ -53,22 +62,19 @@ function Signup() {
         >
           <ThemeProvider theme={theme}>
             <TextField
-              onChange={handleChange("name")}
-              value={values.name}
               color="accent"
               sx={{ width: "100%" }}
               id="outlined-basic"
               label="Name"
+              onChange={handleChange("name")}
               variant="outlined"
             />
             <TextField
-              onChange={handleChange("email")}
-              value={values.email}
-              type="email"
               color="accent"
               sx={{ width: "100%", marginTop: "30px" }}
               id="outlined-basic"
               label="Email"
+              onChange={handleChange("email")}
               variant="outlined"
             />
             <FormControl
@@ -77,7 +83,6 @@ function Signup() {
             >
               <InputLabel htmlFor="passwordInput">Password</InputLabel>
               <OutlinedInput
-                value={values.password}
                 onChange={handleChange("password")}
                 type={values.passwordVisible ? "text" : "password"}
                 label="Password"
@@ -98,6 +103,7 @@ function Signup() {
           </ThemeProvider>
 
           <Button
+            onClick={handleButton}
             sx={{
               backgroundColor: "#E7D600",
               width: "185px",
@@ -109,11 +115,11 @@ function Signup() {
             }}
             variant="contained"
           >
-            Sign Up
+            Login
           </Button>
-          <Link to="/login" className="mt-8 text-gray-700">
-            already have an account ?{" "}
-            <span className="text-green-400">login</span>
+          <Link to="/signup" className="mt-8 text-gray-700">
+            don't have an account ?{" "}
+            <span className="text-green-400">signup</span>
           </Link>
         </Box>
       </Container>
@@ -121,4 +127,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default Login;

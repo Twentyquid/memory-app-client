@@ -12,6 +12,7 @@ import Dashboard from "./components/Dashboard";
 import GetStarted from "./components/GetStarted";
 import Signup from "./components/Signup";
 import Onboard from "./components/Onboard";
+import Login from "./components/Login";
 
 function App() {
   const dispatch = useDispatch();
@@ -28,6 +29,7 @@ function App() {
         <Route path="/getstarted" element={<GetStarted />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/onboard" element={<Onboard />}></Route>
+        <Route path="/login" element={<Login />}></Route>
       </Routes>
     </>
   );
