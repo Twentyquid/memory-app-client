@@ -4,8 +4,8 @@ import { getFeed } from "./reducers/postSlice";
 import { useDispatch } from "react-redux";
 
 import Home from "./components/Home";
-import Navbar from "./components/Navbar";
-import TitleBar from "./components/Titlebar";
+// import Navbar from "./components/Navbar";
+// import TitleBar from "./components/Titlebar";
 import { Routes, Route } from "react-router-dom";
 import AddPost from "./components/AddPost";
 import Dashboard from "./components/Dashboard";
@@ -21,7 +21,6 @@ function App() {
 
   return (
     <>
-      <TitleBar></TitleBar>
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/add" element={<AddPost />}></Route>
@@ -30,7 +29,6 @@ function App() {
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/onboard" element={<Onboard />}></Route>
       </Routes>
-      <Navbar></Navbar>
     </>
   );
 }
